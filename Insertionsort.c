@@ -1,6 +1,6 @@
 #include<stdio.h>
 
-void insertionSo(int arr[], int n)
+void insert(int arr[], int n)
 {
     int i,j,temp;
     for ( i = 1; i < n; i++) 
@@ -28,7 +28,7 @@ int main()
         printf("Elements %d: ",i+1);
         scanf("%d",&arr[i]);
     }
-    insertionSo(arr,n);
+    insert(arr,n);
     printf("The array elements after sorting are:\n");
     for ( i = 0; i < n; i++)
     {
