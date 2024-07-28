@@ -1,90 +1,94 @@
-#include <stdio.h>
-
-#define MAX_SIZE 10
-
-int main() {
-    int arr[MAX_SIZE];
-    int size;
-
-    printf("Enter the size of the array (max %d): ", MAX_SIZE);
-    scanf("%d", &size);
-
-    if (size > MAX_SIZE) {
-        printf("Size cannot be greater than %d. Exiting.\n", MAX_SIZE);
-        return 1;
+// Operations on array 
+#include<stdio.h>
+int arr[50],n,i,num,pos;
+//Creating an array
+int create()
+{
+    printf("Enter the size of the array: ");
+    scanf("%d",&n);
+    for ( i = 0; i < n; i++)
+    {
+        printf("Enter the elements %d: ",i+1);
+        scanf("%d",&arr[i]);
     }
-
-    printf("Enter %d elements: ", size);
-    for (int i = 0; i < size; i++) {
-        scanf("%d", &arr[i]);
+    return 0;   
+}
+//Traversing an array
+int traverse()
+{
+    printf("The elements in the array are:");
+    for ( i = 0; i < n; i++)
+    {
+        printf(" %d",arr[i]);
     }
-
-    int choice, element, index;
-
-    while (1) {
-        printf("1. Insert element\n");
-        printf("2. Update element\n");
-        printf("3. Delete element\n");
-        printf("4. Print array\n");
-        printf("5. Exit\n");
-        printf("Enter your choice: ");
-        scanf("%d", &choice);
-
-        switch (choice) {
-            case 1:
-                if (size < MAX_SIZE) {
-                    printf("Enter element to insert: ");
-                    scanf("%d", &element);
-                    printf("Enter index to insert at: ");
-                    scanf("%d", &index);
-                    if (index < size) {
-                        for (int i = size; i > index; i--) {
-                            arr[i] = arr[i - 1];
-                        }
-                        arr[index] = element;
-                        size++;
-                    } else {
-                        printf("Index out of bounds. Cannot insert element.\n");
-                    }
-                } else {
-                    printf("Array is full. Cannot insert element.\n");
-                }
-                break;
-            case 2:
-                printf("Enter element to update: ");
-                scanf("%d", &element);
-                printf("Enter index to update at: ");
-                scanf("%d", &index);
-                if (index < size) {
-                    arr[index] = element;
-                } else {
-                    printf("Index out of bounds. Cannot update element.\n");
-                }
-                break;
-            case 3:
-                printf("Enter index to delete at: ");
-                scanf("%d", &index);
-                if (index < size) {
-                    for (int i = index; i < size - 1; i++) {
-                        arr[i] = arr[i + 1];
-                    }
-                    size--;
-                } else {
-                    printf("Index out of bounds. Cannot delete element.\n");
-                }
-                break;
-            case 4:
-                for (int i = 0; i < size; i++) {
-                    printf("%d ", arr[i]);
-                }
-                printf("\n");
-                break;
-            case 5:
-                return 0;
-            default:
-                printf("Invalid choice. Please try again.\n");
-        }
+    return 0;  
+}
+//Inserting an array
+int insert()
+{
+    printf("Enter the element to insert: ");
+    scanf("%d",&num);
+    printf("Enter the position to insert: ");
+    scanf("%d", &pos);
+    for ( i = n-1; i>=pos-1; i--)
+    {
+        arr[i+1]=arr[i];
     }
-
+    arr[pos-1]=num;
+    n++;
     return 0;
+}
+//Deleting an array
+int delete()
+{
+  printf("Enter the position you want to delete: ");
+  scanf("%d", &pos);
+  if (pos<=0 || pos>n)
+  {
+    printf("Invalid Position");
+  }
+  else
+  {
+    for ( i = pos-1; i < n-1; i++)
+    {
+       arr[i+1]=arr[i]; 
+    }
+    n--;  
+  }
+  return 0;  
+}
+//Driver function
+int main()
+{
+    int choice;
+    while (1)
+    {
+        printf("\n1. Create ");
+        printf("\n2. Traverse ");
+        printf("\n3. Insert ");
+        printf("\n4. Delete");
+        printf("\n5. Exit");
+        printf("\nEnter your choice:");
+        scanf("%d",&choice);
+        switch (choice)
+        {
+            case 1:
+              create();
+              break;
+            case 2:
+              traverse();
+              break;
+            case 3:
+              insert();
+              break;
+            case 4:
+              delete();
+              break;
+            case 5:
+              return 0;
+            default:
+              printf("Your choice is invalid");
+        }    
+    }
+     return 0;
 }
